@@ -1,10 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // External libs
 import { Icon, Table } from 'semantic-ui-react';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
-export default function TableCrypto(props) {
+const TableCrypto = (props) => {
   const { cryptos } = props
   return (
     <>
@@ -89,3 +90,16 @@ export default function TableCrypto(props) {
     </>
   )
 }
+
+TableCrypto.propTypes = {
+  /**
+   * Listado de criptomonedas
+   */
+  cryptos: PropTypes.object.isRequired,
+};
+
+TableCrypto.defaultProps = {
+  cryptos: undefined,
+};
+
+export default TableCrypto

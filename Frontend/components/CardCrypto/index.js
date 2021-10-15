@@ -1,18 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // External libs
 import {
-  Form,
-  Segment,
-  Button,
-  Header,
-  Grid,
   Statistic,
   Placeholder
 } from 'semantic-ui-react';
 
-export default function CardCrypto(props) {
-  const { loading, name, value } = props
+/**
+ * Primary UI component for user interaction
+ */
+const CardCrypto = ({loading, name, value}) => {
   
   if (loading) {
     return (
@@ -23,7 +21,7 @@ export default function CardCrypto(props) {
     <Statistic>
       {value?
         <Statistic.Value>
-          ${value}
+          {value}
         </Statistic.Value>
       :null}
       <Statistic.Label>
@@ -46,3 +44,26 @@ function LoadingCardCrypto() {
     </Placeholder>
   )
 }
+
+CardCrypto.propTypes = {
+  /**
+   * Cargando los datos
+   */
+  loading: PropTypes.bool,
+  /**
+   * Nombre de la criptomoneda
+   */
+  name: PropTypes.string,
+  /**
+   * Valor del balance
+   */
+  value: PropTypes.number,
+};
+
+CardCrypto.defaultProps = {
+  loading: true,
+  name: undefined,
+  value: undefined,
+};
+
+export default CardCrypto

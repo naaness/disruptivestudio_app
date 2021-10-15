@@ -1,39 +1,19 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 // Components
-// import Header from "../../components/Header";
+import Header from "../../components/Header";
 
 // External libs
 import {
   Container,
-  Divider,
-  Dropdown,
-  Grid,
-  Header,
-  Image,
-  List,
-  Menu,
-  Segment,
 } from 'semantic-ui-react'
 
-export default function BasicLayout( props ) {
+const BasicLayout = (props) => {
   const { children } = props;
   return (
     <div>
-      <Menu
-        fixed='top'
-        className="basic-layout__menu"
-      >
-        <Container
-        >
-          <Menu.Item
-            as='a'
-            header
-          >
-            <Image size='mini' src='https://disruptivestudio.com/images/body/logo.svg' style={{ width: '50%' }} />
-          </Menu.Item>
-        </Container>
-      </Menu>
+      <Header />
 
       <Container text style={{ marginTop: '7em' }}>
         {children}
@@ -41,3 +21,16 @@ export default function BasicLayout( props ) {
     </div>
   )
 }
+
+BasicLayout.propTypes = {
+  /**
+   * Pagina a visualizar
+   */
+  children: PropTypes.any,
+};
+
+BasicLayout.defaultProps = {
+  children: undefined,
+};
+
+export default BasicLayout

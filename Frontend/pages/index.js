@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 // Api
 import { balanceApi } from '../api/balances';
@@ -16,16 +17,9 @@ import TableCrypto from '../components/TableCrypto';
 
 // External libs
 import {
-  Form,
   Segment,
-  Button,
   Header,
   Grid,
-  Statistic,
-  Placeholder,
-  Icon,
-  Table,
-  Label
 } from 'semantic-ui-react';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 
@@ -73,6 +67,18 @@ export default function Home() {
   }
 
   return (
+    <Pure
+      loading={loading}
+      onGetBalance={onGetBalance}
+      showBalance={showBalance}
+      cryptos={cryptos}
+    />
+  );
+}
+
+const Pure = (props) => {
+  const { loading, onGetBalance, showBalance, cryptos } = props
+  return (
     <BasicLayout className="home">
       <Header
         as='h2'
@@ -81,7 +87,6 @@ export default function Home() {
       >
         Calcular balance
       </Header>
-      
       
       <Segment>
         <FormBalance
@@ -118,5 +123,35 @@ export default function Home() {
         />
       </Segment>
     </BasicLayout>
-  );
+  )
+}
+
+Pure.propTypes = {
+  /**
+   * Consultando balance
+   */
+  loading: PropTypes.bool.isRequired,
+  /**
+   * Consulta el balance
+   */
+  onGetBalance: PropTypes.func.isRequired,
+  /**
+   * Visualizar los balances
+   */
+  showBalance: PropTypes.bool.isRequired,
+  /**
+   * Listado de criptomonedas
+   */
+  cryptos: PropTypes.object.isRequired,
+};
+
+Pure.defaultProps = {
+  loading: false,
+  onGetBalance: undefined,
+  showBalance: false,
+  cryptos: undefined
+};
+
+export {
+  Pure
 }

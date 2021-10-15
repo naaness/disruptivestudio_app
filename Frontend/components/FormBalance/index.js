@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 
 // External libs
 import {
@@ -8,7 +9,7 @@ import {
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-export default function FormBalance(props) {
+const FormBalance = (props) => {
   const { onGetBalance, loading } = props
 
   const formik = useFormik({
@@ -50,7 +51,7 @@ export default function FormBalance(props) {
   )
 }
 
-function initialValues( user ) {
+function initialValues() {
   return {
     amount: ""
   }
@@ -58,6 +59,24 @@ function initialValues( user ) {
 
 function validationSchema() {
   return {
-    amount: Yup.number(true).required( true ),
+    amount: Yup.number(true).required(true),
   }
 }
+
+FormBalance.propTypes = {
+  /**
+   * Consulta el balance
+   */
+  onGetBalance: PropTypes.func.isRequired,
+  /**
+   * Consultando balance
+   */
+  loading: PropTypes.bool.isRequired,
+};
+
+FormBalance.defaultProps = {
+  onGetBalance: undefined,
+  loading: false
+};
+
+export default FormBalance
